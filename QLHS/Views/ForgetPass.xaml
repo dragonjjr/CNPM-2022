@@ -30,7 +30,7 @@
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Tên đăng nhập" 
                             Margin="0 30"/>
-                <Button Name="btnGui"  Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10">Đăng nhập</Button>
+                <Button Name="btnGui"  Style="{StaticResource buttonRound}" Height="46" Margin="0 25 0 10">Xác nhận</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">Đăng nhập</Hyperlink>
                 </TextBlock>
