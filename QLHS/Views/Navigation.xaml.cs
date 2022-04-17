@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLHS.Views.Class;
 
 namespace QLHS.Views
 {
     /// <summary>
-    /// Interaction logic for Navbar.xaml
+    /// Interaction logic for Navigation.xaml
     /// </summary>
-    public partial class Navbar : UserControl
+    public partial class Navigation : Window
     {
-        public Navbar()
+        public Navigation()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ClassManager();
         }
     }
 }

@@ -10,6 +10,6 @@
       Title="ClassManager" Background="White">
 
     <Grid>
-        <uc:Navbar Width="200" HorizontalAlignment="Left"/>
+        <Button Background="Red" Width="50"></Button>
     </Grid>
 </Page>

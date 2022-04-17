@@ -25,7 +25,7 @@ namespace QLHS
         public MainWindow()
         {
             InitializeComponent();
-            Main.Content = new ClassManager();
+            Main.Content = new Login();
         }
     }
 }

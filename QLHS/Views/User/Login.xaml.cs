@@ -23,10 +23,13 @@ namespace QLHS.Views
         public Login()
         {
             InitializeComponent();
+            tbTenDangNhap.Text = "long";
         }
         private void btnDangNhap_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(pwbMatKhau.Password);
+            Navigation form = new Navigation();
+            form.Show();
+           
         }
     }
 }
