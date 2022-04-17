@@ -12,20 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QLHS.Views;
-using QLHS.Views.Class;
 
-namespace QLHS
+namespace QLHS.Views.Class
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ClassManager.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ClassManager : Page
     {
-        public MainWindow()
+        public ClassManager()
         {
             InitializeComponent();
-            Main.Content = new ClassManager();
         }
+
+
     }
 }

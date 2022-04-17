@@ -15,7 +15,7 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <Border CornerRadius="0 0 0 0">
-            <Image Source="../Assets/Images/icon_logo.png"></Image>
+            <Image Source="../../Assets/Images/icon_logo.png"></Image>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#1C86EE" Offset="0"></GradientStop>

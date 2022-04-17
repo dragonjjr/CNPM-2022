@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QLHS.Views;
-using QLHS.Views.Class;
 
-namespace QLHS
+namespace QLHS.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Navbar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Navbar : UserControl
     {
-        public MainWindow()
+        public Navbar()
         {
             InitializeComponent();
-            Main.Content = new ClassManager();
         }
     }
 }
