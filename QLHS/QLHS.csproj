@@ -75,28 +75,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
     <Compile Include="DB\Model1.cs" />
-=======
-    <Compile Include="DB\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
->>>>>>> Stashed changes
     <Compile Include="DB\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
     <Compile Include="DB\Model11.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-=======
->>>>>>> Stashed changes
     <Compile Include="DB\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -130,7 +119,6 @@
     <Compile Include="DB\tb_Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
     <Compile Include="Views\ForgetPass.xaml.cs">
       <DependentUpon>ForgetPass.xaml</DependentUpon>
     </Compile>
@@ -139,10 +127,6 @@
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
-=======
-    <Compile Include="Views\Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
->>>>>>> Stashed changes
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -195,16 +179,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="packages\EntityFramework.5.0.0\Content\App.config.transform" />
-    <None Include="packages\EntityFramework.5.0.0\Content\Web.config.transform" />
-    <None Include="packages\EntityFramework.5.0.0\EntityFramework.5.0.0.nupkg" />
-    <None Include="packages\EntityFramework.5.0.0\tools\EntityFramework.PS3.psd1" />
-    <None Include="packages\EntityFramework.5.0.0\tools\EntityFramework.psd1" />
-    <None Include="packages\EntityFramework.5.0.0\tools\EntityFramework.psm1" />
-    <None Include="packages\EntityFramework.5.0.0\tools\init.ps1" />
-    <None Include="packages\EntityFramework.5.0.0\tools\install.ps1" />
-    <None Include="packages\EntityFramework.5.0.0\tools\Redirect.config" />
-    <None Include="packages\EntityFramework.5.0.0\tools\Redirect.VS11.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -227,21 +201,8 @@
     </Content>
     <Content Include="DB\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-<<<<<<< Updated upstream
       <LastGenOutput>Model11.cs</LastGenOutput>
     </Content>
-=======
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-    <Content Include="packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll" />
-    <Resource Include="packages\EntityFramework.5.0.0\lib\net40\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll" />
-    <Resource Include="packages\EntityFramework.5.0.0\lib\net45\EntityFramework.xml" />
-    <Resource Include="packages\EntityFramework.5.0.0\tools\about_EntityFramework.help.txt" />
-    <Content Include="packages\EntityFramework.5.0.0\tools\EntityFramework.PowerShell.dll" />
-    <Content Include="packages\EntityFramework.5.0.0\tools\EntityFramework.PowerShell.Utility.dll" />
-    <Content Include="packages\EntityFramework.5.0.0\tools\migrate.exe" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
