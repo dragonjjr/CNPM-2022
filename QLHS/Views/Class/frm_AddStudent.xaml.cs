@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QLHS.Views.Class
 {
     /// <summary>
-    /// Interaction logic for ClassManager.xaml
+    /// Interaction logic for frm_AddStudent.xaml
     /// </summary>
-    public partial class ClassManager : Page
+    public partial class frm_AddStudent : Window
     {
-        public ClassManager()
+        public frm_AddStudent()
         {
             InitializeComponent();
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            // Open add form.
-            frm_AddStudent form = new frm_AddStudent();
-            form.Show();
-            
         }
     }
 }
