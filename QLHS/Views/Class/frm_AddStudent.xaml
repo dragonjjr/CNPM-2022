@@ -9,8 +9,8 @@
         Title="Thêm học sinh" Height="600" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid>
-            <StackPanel>
+        
+        <StackPanel>
                 <TextBlock HorizontalAlignment="Center" FontSize="20">Thêm học sinh vào lớp</TextBlock>
                 <WrapPanel HorizontalAlignment="Center" Margin="0,15,0,0">
                     <Border CornerRadius="6" BorderThickness="1" BorderBrush="Black">
@@ -18,24 +18,36 @@
                     </Border>
                     <Button Name="btnSearch" Width="100" Margin="30,0,0,0" Content="Tìm kiếm" Foreground="White"></Button>
                 </WrapPanel>
-
-                <ListView Margin="0,20,0,0">
-                    <ListView.View>
+                <TextBlock Margin="10,15,0,0">Danh sách các học sinh chưa có lớp</TextBlock>
+                <ListView Name="lvStudent">
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <EventSetter Event="PreviewGotKeyboardFocus" Handler="SelectCurrentItem"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="" Width="50" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Họ tên" Width="150" DisplayMemberBinding="{Binding}" />
-                            <GridViewColumn Header="Giới tính" Width="150" DisplayMemberBinding="{Binding}" />
-                            <GridViewColumn Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding}" />
-                            <GridViewColumn Header="Địa chỉ" Width="150" DisplayMemberBinding="{Binding}" />
-                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding}" />
+                            <GridViewColumn Header="" Width="50" DisplayMemberBinding="{Binding ID}" />
+                            <GridViewColumn Header="Họ tên" Width="150" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Giới tính" Width="150" DisplayMemberBinding="{Binding Gender}" />
+                            <GridViewColumn Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />
+                            <GridViewColumn Header="Địa chỉ" Width="150" DisplayMemberBinding="{Binding Address}" />
+                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
 
-                <Button Name="btnAddIntoClass" Width="120" Background="Green" Foreground="White" Content="Thêm vào lớp"></Button>
-
+                <WrapPanel HorizontalAlignment="Right" Margin="0,10,20,0">
+                    <Button Name="btnAddIntoClass" Width="120" Background="Green" Foreground="White" Content="Thêm vào lớp" Click="btnAddIntoClass_Click"></Button>
+                    <Button Name="btnExit" Content="Thoát" Width="100" Margin="20,0,0,0" Foreground="White" Click="btnExit_Click"></Button>
+                </WrapPanel>
+              
             </StackPanel>
 
-        </Grid>
     </Grid>
 </Window>
