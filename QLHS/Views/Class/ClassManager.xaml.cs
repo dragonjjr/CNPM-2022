@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QLHS.Model;
+using QLHS.DB;
 
 namespace QLHS.Views.Class
 {
@@ -22,7 +23,6 @@ namespace QLHS.Views.Class
     /// </summary>
     public partial class ClassManager : Page
     {
-
         private ClassManageDAO classManageDao = new ClassManageDAO();
 
         public ClassManager()
@@ -46,6 +46,13 @@ namespace QLHS.Views.Class
             }
         }
 
+        private void ResetForm()
+        {
+            txtSearch.Text = "";
+            tbNumStudent.Text = "";
+            lvStudent.ItemsSource = null;
+        }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (cbClass.SelectedValue != null)
@@ -60,15 +67,46 @@ namespace QLHS.Views.Class
                 }
                 else
                 {
-                    MessageBox.Show("Sỉ số lớp đã đầy");
+                    MessageBox.Show("Sỉ số lớp đã đầy", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn lớp học!", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void DoSearch()
+        {
+            var listStudent = classManageDao.GetInfoStudentsOfClass((int)cbClass.SelectedValue, txtSearch.Text);
+            if (listStudent.Count() > 0)
+            {
+                lvStudent.ItemsSource = listStudent;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy học sinh", "Tìm kiếm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin danh sách học sinh tìm kiếm
-           
+            if (cbClass.SelectedValue != null)
+            {
+                // Lấy thông tin danh sách học sinh tìm kiếm
+                try
+                {
+                    DoSearch();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn lớp học!", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -76,6 +114,7 @@ namespace QLHS.Views.Class
         {
             try
             {
+                ResetForm();
                 cbClass.ItemsSource = classManageDao.GetInfoClass((int)cbGrade.SelectedValue);
             }
             catch (Exception ex)
@@ -91,12 +130,60 @@ namespace QLHS.Views.Class
             {
                 try
                 {
-                    lvStudent.ItemsSource = classManageDao.GetInfoStudentsOfClass((int)cbClass.SelectedValue);
+                    ResetForm();
+
+                    var infoClass = cbClass.SelectedItem as tb_Class;
+                    tbNumStudent.Text = infoClass.Quantity.ToString();
+                    lvStudent.ItemsSource = classManageDao.GetInfoStudentsOfClass((int)cbClass.SelectedValue,"");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
                 }
+            }
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (cbClass.SelectedValue != null)
+                {
+                    if (lvStudent.SelectedItem != null)
+                    {
+                        var classInfo = cbClass.SelectedItem as tb_Class;
+                        var student = lvStudent.SelectedItem as tb_Students;
+
+                        if (MessageBox.Show("Bạn có muốn xóa học sinh này khỏi lớp " + classInfo.Name.ToString(), "Xóa học sinh", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            if (classManageDao.DeleteStudentFromClass(student.ID))
+                            {
+
+                                // Load lại danh sách
+                                lvStudent.ItemsSource = classManageDao.GetInfoStudentsOfClass(classInfo.ID,txtSearch.Text);
+
+                                MessageBox.Show("Xóa học sinh thành công", "Xóa học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Có lỗi xảy ra, xóa thất bại", "Xóa học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bạn chưa chọn học sinh muốn xóa!", "Xóa học sinh", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn lớp học!", "Xóa học sinh", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
            
         }

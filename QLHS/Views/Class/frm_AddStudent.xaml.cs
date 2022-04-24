@@ -29,14 +29,14 @@ namespace QLHS.Views.Class
 
             InitializeComponent();
             this.classManagePage = classManagePage;
-            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass();
+            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass("");
         }
 
         public frm_AddStudent()
         {
             InitializeComponent();
 
-            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass();
+            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass("");
         }
 
         private void SelectCurrentItem(object sender, KeyboardFocusChangedEventArgs e)
@@ -57,37 +57,62 @@ namespace QLHS.Views.Class
                 // Check quantity
                 if (classManageDao.CheckQuantityStudentOfclass(1, 1))
                 {
-                    if (MessageBox.Show("Bạn có muốn thêm học sinh này vào lớp", "Add student", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    var classInfo = classManagePage.cbClass.SelectedItem as tb_Class;
+                    var student = lvStudent.SelectedItem as tb_Students;
+
+                    if (MessageBox.Show("Bạn có muốn thêm học sinh này vào lớp "+classInfo.Name.ToString(), "Thêm học sinh", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
-                        int classId = (int)classManagePage.cbClass.SelectedValue;
-                        var student = lvStudent.SelectedItem as tb_Students;
-
-                        if(classManageDao.AddStudentIntoClass(classId,student.ID))
+                        if (classManageDao.AddStudentIntoClass(classInfo.ID, student.ID))
                         {
-                            MessageBox.Show("Thêm học sinh thành công", "Add student");
 
                             // Load lại danh sách
-                            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass();
-                            this.classManagePage.lvStudent.ItemsSource = classManageDao.GetInfoStudentsOfClass(classId);
+                            lvStudent.ItemsSource = classManageDao.GetInfoStudentsWithoutClass(txtSearch.Text);
+                            this.classManagePage.lvStudent.ItemsSource = classManageDao.GetInfoStudentsOfClass(classInfo.ID,this.classManagePage.txtSearch.Text);
+
+                            MessageBox.Show("Thêm học sinh thành công", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Có lỗi xảy ra, thêm thất bại", "Add student");
+                            MessageBox.Show("Có lỗi xảy ra, thêm thất bại", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Sỉ số lớp đã đầy");
+                    MessageBox.Show("Sỉ số lớp đã đầy", "Thêm học sinh",MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void DoSearch()
+        {
+            var listStudent = classManageDao.GetInfoStudentsWithoutClass(txtSearch.Text);
+            if (listStudent.Count() > 0)
+            {
+                lvStudent.ItemsSource = listStudent;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy học sinh", "Tìm kiếm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DoSearch();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

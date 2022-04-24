@@ -26,16 +26,16 @@ namespace QLHS.Model
             return list;
         }
 
-        public ObservableCollection<tb_Students> GetInfoStudentsOfClass(int classId)
+        public ObservableCollection<tb_Students> GetInfoStudentsOfClass(int classId, string studentNameSearch)
         {
-            var list = new ObservableCollection<tb_Students>(db.tb_Students.Where(st => st.ClassID == classId && st.IsDeleted == false).ToList());
+            var list = new ObservableCollection<tb_Students>(db.tb_Students.Where(st => st.ClassID == classId && st.IsDeleted == false && st.Name.Contains(studentNameSearch)).ToList());
 
             return list;
         }
 
-        public ObservableCollection<tb_Students> GetInfoStudentsWithoutClass()
+        public ObservableCollection<tb_Students> GetInfoStudentsWithoutClass(string studentNameSearch)
         {
-            var list = new ObservableCollection<tb_Students>(db.tb_Students.Where(st => st.ClassID == null && st.IsDeleted == false).ToList());
+            var list = new ObservableCollection<tb_Students>(db.tb_Students.Where(st => st.ClassID == null && st.IsDeleted == false && st.Name.Contains(studentNameSearch)).ToList());
 
             return list;
         }
@@ -49,11 +49,20 @@ namespace QLHS.Model
 
         public bool AddStudentIntoClass(int classId, int studentId)
         {
-            var student = db.tb_Students.Single(st => st.ID == studentId);
+            var student = db.tb_Students.Single(st => st.ID == studentId && st.IsDeleted == false);
             student.ClassID = classId;
 
-            return db.SaveChanges()>0;
+            return db.SaveChanges() > 0;
         }
+
+        public bool DeleteStudentFromClass(int studentId)
+        {
+            var student = db.tb_Students.Single(st => st.ID == studentId && st.IsDeleted == false);
+            student.ClassID = null;
+
+            return db.SaveChanges() > 0;
+        }
+
 
         public ClassManageDAO()
         {

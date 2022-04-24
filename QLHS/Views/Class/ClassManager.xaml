@@ -14,29 +14,28 @@
     <Grid>
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="20">Quản lý lớp học</TextBlock>
-            <WrapPanel Margin="70,15,0,0">
+            <WrapPanel Margin="70,18,0,0">
                 <Label Target="{Binding ElementName=cbGrade}">Khối:</Label>
                 <ComboBox Name="cbGrade" Width="150" Margin="10,0,0,0" SelectionChanged="cbGrade_SelectionChanged" DisplayMemberPath="Name" SelectedValuePath="ID"></ComboBox>
                 <Label Target="{Binding ElementName=cbGrade}" Margin="30,0,0,0">Lớp:</Label>
                 <ComboBox Name="cbClass" Width="150" Margin="10,0,0,0" SelectionChanged="cbClass_SelectionChanged" DisplayMemberPath="Name" SelectedValuePath="ID"></ComboBox>
                 <Label Target="{Binding ElementName=tbNumStudent}" Margin="30,0,0,0">Sỉ số:</Label>
-                <TextBlock x:Name="tbNumStudent" Margin="10,4,0,0">50</TextBlock>
+                <TextBlock x:Name="tbNumStudent" Margin="10,4,0,0"></TextBlock>
             </WrapPanel>
 
-            <WrapPanel Margin="70,15,0,0">
+            <WrapPanel Margin="70,18,0,0">
                 <Border CornerRadius="6" BorderThickness="1" BorderBrush="Black">
                     <TextBox Name="txtSearch" Width="400" FontSize="15"  materialDesign:HintAssist.Hint=" Tìm kiếm" />
                 </Border>
                 <Button Name="btnSearch" Width="100" Margin="30,0,0,0" Content="Tìm kiếm" Foreground="White" Click="btnSearch_Click"></Button>
-                <Button Name="btnDelete" Width="50" Margin="30,0,0,0" Background="Red" Foreground="White"></Button>
-                <Button Name="btnAdd" Width="50" Margin="10,0,0,0" Background="Green" Click="btnAdd_Click"></Button>
+                <Button Name="btnDelete" Width="70" Margin="30,0,0,0" Background="Red" Foreground="White" Content="Xóa" Click="btnDelete_Click"></Button>
+                <Button Name="btnAdd" Width="70" Margin="10,0,0,0" Background="Green" Click="btnAdd_Click" Foreground="White" Content="Thêm"></Button>
 
             </WrapPanel>
 
-            <ListView Name="lvStudent" Margin="0,20,0,0">
+            <ListView Name="lvStudent" Margin="0,15,0,0" SelectionMode="Single">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="" Width="50" DisplayMemberBinding="{Binding ID}" />
                         <GridViewColumn Header="Họ tên" Width="150" DisplayMemberBinding="{Binding Name}" />
                         <GridViewColumn Header="Giới tính" Width="150" DisplayMemberBinding="{Binding Gender}" />
                         <GridViewColumn Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />

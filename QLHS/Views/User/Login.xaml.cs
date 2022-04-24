@@ -23,7 +23,6 @@ namespace QLHS.Views
         public Login()
         {
             InitializeComponent();
-            tbTenDangNhap.Text = "long";
         }
         private void btnDangNhap_Click(object sender, RoutedEventArgs e)
         {

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLHS.Views"
         xmlns:uc="clr-namespace:QLHS.Views"
         mc:Ignorable="d"
-        Title="Navigation" Height="600" Width="1000">
+        Title="Navigation" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,10 +37,8 @@
             <Button
             Grid.Row="0"
             Margin="10 0 0 0"
-            Content=" Quản lý hồ sơ học sinh" 
+            Content="Quản lý hồ sơ học sinh" 
             Click="Button_Click"/>
-
-
             <Button
 
             Grid.Row="1"
