@@ -35,9 +35,11 @@
             </Grid.RowDefinitions>
 
             <Button
-            Grid.Row="0"
-            Margin="10 0 0 0"
-            Content="Quản lý hồ sơ học sinh" />
+                Name="btnStudentManage"
+                Grid.Row="0"
+                Margin="10 0 0 0"
+                Content="Quản lý hồ sơ học sinh"
+                Click="btnStudentManage_Click"/>
 
             <Button
             Name="btnManageClass"
@@ -65,7 +67,7 @@
             Content="Báo cáo"/>
         </Grid>
 
-        <Frame x:Name="Main" Grid.Column="1"></Frame>
+        <Frame x:Name="Main" Grid.Column="1" NavigationUIVisibility="Hidden"></Frame>
 
     </Grid>
 

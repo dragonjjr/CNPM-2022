@@ -24,6 +24,7 @@ namespace QLHS.Views
         public Navigation()
         {
             InitializeComponent();
+            Main.Content = new StudentManage();
         }
 
         private void btnManageClass_Click(object sender, RoutedEventArgs e)
@@ -34,6 +35,11 @@ namespace QLHS.Views
         private void btnRegulationManage_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new RegulationMange();
+        }
+
+        private void btnStudentManage_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new StudentManage();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLHS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,42 @@ namespace QLHS.Views
     /// </summary>
     public partial class Login : Page
     {
+        private AuthenticationDAO authenticationDAO = new AuthenticationDAO();
         public Login()
         {
             InitializeComponent();
         }
-        private void btnDangNhap_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Navigation form = new Navigation();
-            form.Show();
-           
+            string username = txtUserName.Text;
+            string password = pwbPassword.Password;
+            try
+            {
+                int Result = authenticationDAO.Login(username, password);
+
+
+                switch (Result)
+                {
+                    case 0:
+                        MessageBox.Show("Tên tài khoản không tồn tại");
+                        txtUserName.Focus();
+                        break;
+                    case 1:
+                        Navigation form = new Navigation();
+                        App.Current.MainWindow.Close();
+                        form.Show();
+                        break;
+                    case 2:
+                        MessageBox.Show("Sai Mật khẩu");
+                        pwbPassword.Focus();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
     }
 }

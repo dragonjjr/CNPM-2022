@@ -38,6 +38,43 @@
             </Style>
 
 
+            <Style TargetType="Button" x:Key="button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*" MinWidth="50"/>
+                                    <ColumnDefinition Width="Auto" MinWidth="4"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- some stuff, like border etc. -->
+
+                                <Grid Background="#0281F0" Margin="-30 0">
+                                    <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="0 10"  FontSize="14"  TextAlignment="Justify" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Thumb x:Name="PART_HeaderGripper"  
+                                           
+                                               OpacityMask="Transparent"
+                                                        Cursor="SizeWE">
+                                    </Thumb>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="OverridesDefaultStyle" Value="False" />
+                <Setter Property="FontWeight" Value="Bold"/>
+
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

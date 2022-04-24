@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BinaryToGender.cs" />
     <Compile Include="DB\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,12 +121,17 @@
     <Compile Include="DB\tb_Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\AuthenticationDAO.cs" />
     <Compile Include="Model\ClassManageDAO.cs" />
+    <Compile Include="Model\StudentManageDAO.cs" />
     <Compile Include="Views\Class\ClassManager.xaml.cs">
       <DependentUpon>ClassManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Class\frm_AddStudent.xaml.cs">
       <DependentUpon>frm_AddStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Class\StudentManage.xaml.cs">
+      <DependentUpon>StudentManage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Navigation.xaml.cs">
       <DependentUpon>Navigation.xaml</DependentUpon>
@@ -171,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Class\frm_AddStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Class\StudentManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

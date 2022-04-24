@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLHS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,45 @@ namespace QLHS.Views
     /// </summary>
     public partial class Register : Page
     {
+        private AuthenticationDAO authenticationDAO = new AuthenticationDAO();
         public Register()
         {
             InitializeComponent();
+        }
+
+         private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            string username = txtUserName.Text;
+            string password = pwbPassword.Password;
+            string confirmpass = pwbConfirmPass.Password;
+
+            try
+            {
+                // Gọi hàm đăng ký
+                int Result = authenticationDAO.Register(username, password, confirmpass);
+
+                switch (Result)
+                {
+                    case 0:
+                        MessageBox.Show("Tên tài khoản đã tồn tại");
+                        txtUserName.Focus();
+                        break;
+                    case 1:
+                        MessageBox.Show("Đăng ký thành công");
+                        txtUserName.Text = "";
+                        pwbPassword.Password = "";
+                        pwbConfirmPass.Password = "";
+                        break;
+                    case 2:
+                        MessageBox.Show("Mật khẩu xác nhận lại không đúng");
+                        pwbConfirmPass.Focus();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
     }
 }

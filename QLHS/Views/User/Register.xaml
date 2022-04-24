@@ -25,22 +25,22 @@
         </Border>
         <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 0 0 0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="280">
-                <TextBox Name="tbTenDangNhap" FontSize="14"
+                <TextBox Name="txtUserName" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Tên đăng nhập" 
                             Margin="0 15"/>
-                <PasswordBox Name="pwbMatKhau" FontSize="14"
+                <PasswordBox Name="pwbPassword" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Mật khẩu" 
                             Margin="0 15"/>
-                <PasswordBox Name="pwbMatKhauXacNhan" FontSize="14"
+                <PasswordBox Name="pwbConfirmPass" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Xác nhận mật khẩu" 
                             Margin="0 15"/>
-                <Button Name="btnDangKy" Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10">Đăng ký</Button>
+                <Button Name="btnRegister" Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10" Click="btnRegister_Click">Đăng ký</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">
                         Đăng nhập
