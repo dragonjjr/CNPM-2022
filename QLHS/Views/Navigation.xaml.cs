@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using QLHS.Views.Class;
+using QLHS.Views.Regulation;
 
 namespace QLHS.Views
 {
@@ -25,9 +26,14 @@ namespace QLHS.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnManageClass_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new ClassManager();
+        }
+
+        private void btnRegulationManage_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new RegulationMange();
         }
     }
 }

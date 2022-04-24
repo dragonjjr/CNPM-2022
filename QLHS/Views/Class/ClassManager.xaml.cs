@@ -85,6 +85,7 @@ namespace QLHS.Views.Class
             }
             else
             {
+                lvStudent.ItemsSource = null;
                 MessageBox.Show("Không tìm thấy học sinh", "Tìm kiếm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

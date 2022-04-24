@@ -37,14 +37,14 @@
             <Button
             Grid.Row="0"
             Margin="10 0 0 0"
-            Content="Quản lý hồ sơ học sinh" 
-            Click="Button_Click"/>
-            <Button
+            Content="Quản lý hồ sơ học sinh" />
 
+            <Button
+            Name="btnManageClass"
             Grid.Row="1"
             Margin="10 0 0 0"
             Content="Quản lý lớp học"
-               />
+            Click="btnManageClass_Click"  />
 
             <Button
             Grid.Row="2"
@@ -52,18 +52,21 @@
             Content="Quản lý điểm" />
 
             <Button
+            Name="btnRegulationManage"
             Grid.Row="3"
             Margin="10 0 0 0"
-            Content="Quản lý qui định" />
+            Content="Quản lý qui định" 
+            Click="btnRegulationManage_Click"
+             />
 
             <Button
             Grid.Row="4"
             Margin="10 0 0 0"
             Content="Báo cáo"/>
         </Grid>
-        
+
         <Frame x:Name="Main" Grid.Column="1"></Frame>
 
     </Grid>
-   
+
 </Window>

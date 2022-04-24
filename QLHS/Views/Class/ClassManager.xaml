@@ -10,7 +10,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Quản lý lớp học" Background="White">
 
-
     <Grid>
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="20">Quản lý lớp học</TextBlock>
@@ -34,13 +33,21 @@
             </WrapPanel>
 
             <ListView Name="lvStudent" Margin="0,15,0,0" SelectionMode="Single">
+                <ListView.Resources>
+                    <DataTemplate x:Key="Templ">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
+                    </DataTemplate>
+                    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Họ tên" Width="150" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Giới tính" Width="150" DisplayMemberBinding="{Binding Gender}" />
-                        <GridViewColumn Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />
-                        <GridViewColumn Header="Địa chỉ" Width="150" DisplayMemberBinding="{Binding Address}" />
-                        <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Họ tên" Width="150" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Giới tính" Width="150" DisplayMemberBinding="{Binding Gender}"/>
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Địa chỉ" Width="200" DisplayMemberBinding="{Binding Address}"/>
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
                     </GridView>
                 </ListView.View>
             </ListView>

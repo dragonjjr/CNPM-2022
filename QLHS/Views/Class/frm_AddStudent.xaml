@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:QLHS.Views.Class"
         mc:Ignorable="d"
-        Title="Thêm học sinh" Height="600" Width="800"
+        Title="Thêm học sinh" Height="700" Width="900"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
@@ -17,25 +17,23 @@
                 </Border>
                 <Button Name="btnSearch" Width="100" Margin="30,0,0,0" Content="Tìm kiếm" Foreground="White" Click="btnSearch_Click"></Button>
             </WrapPanel>
-            <TextBlock Margin="10,15,0,0" DockPanel.Dock="Top">Danh sách các học sinh chưa có lớp</TextBlock>
+            <TextBlock Margin="10,20,0,10" DockPanel.Dock="Top" FontSize="13">Danh sách các học sinh chưa có lớp</TextBlock>
             <ListView Name="lvStudent" SelectionMode="Single" DockPanel.Dock="Top">
                 <ListView.Resources>
-                    <Style TargetType="ListViewItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter Property="IsSelected" Value="True"/>
-                            </Trigger>
-                        </Style.Triggers>
-                        <EventSetter Event="PreviewGotKeyboardFocus" Handler="SelectCurrentItem"/>
+                    <DataTemplate x:Key="Templ">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
+                    </DataTemplate>
+                    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Họ tên" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Giới tính" Width="150" DisplayMemberBinding="{Binding Gender}" />
-                        <GridViewColumn Header="Năm sinh" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />
-                        <GridViewColumn Header="Địa chỉ" Width="150" DisplayMemberBinding="{Binding Address}" />
-                        <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Họ tên" Width="160" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Giới tính" Width="130" DisplayMemberBinding="{Binding Gender}"/>
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Năm sinh" Width="160" DisplayMemberBinding="{Binding DateOfBirth}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Địa chỉ" Width="250" DisplayMemberBinding="{Binding Address}"/>
+                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" HeaderContainerStyle="{StaticResource HeaderStyle}" Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
                     </GridView>
                 </ListView.View>
             </ListView>

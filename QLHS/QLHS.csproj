@@ -130,6 +130,21 @@
     <Compile Include="Views\Navigation.xaml.cs">
       <DependentUpon>Navigation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Regulation\frm_AddClass.xaml.cs">
+      <DependentUpon>frm_AddClass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regulation\frm_AddSubject.xaml.cs">
+      <DependentUpon>frm_AddSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regulation\frm_UpdateClass.xaml.cs">
+      <DependentUpon>frm_UpdateClass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regulation\frm_UpdateSubject.xaml.cs">
+      <DependentUpon>frm_UpdateSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regulation\RegulationMange.xaml.cs">
+      <DependentUpon>RegulationMange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\User\ForgetPass.xaml.cs">
       <DependentUpon>ForgetPass.xaml</DependentUpon>
     </Compile>
@@ -160,6 +175,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Navigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulation\frm_AddClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulation\frm_AddSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulation\frm_UpdateClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulation\frm_UpdateSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulation\RegulationMange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
