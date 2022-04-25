@@ -1,18 +1,7 @@
 ﻿using QLHS.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QLHS.Views
 {
@@ -25,38 +14,77 @@ namespace QLHS.Views
         public Login()
         {
             InitializeComponent();
+            this.DataContext = new UserLogin();
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUserName.Text;
-            string password = pwbPassword.Password;
-            try
+            string username = txtUserName.Text.Trim();
+            string password = pwbPassword.Password.Trim();
+            if (username.Length > 0 && password.Length > 0)
             {
-                int Result = authenticationDAO.Login(username, password);
-
-
-                switch (Result)
+                if (Validation.GetHasError(txtUserName) == false && Validation.GetHasError(pwbPassword) == false)
                 {
-                    case 0:
-                        MessageBox.Show("Tên tài khoản không tồn tại");
+                    try
+                    {
+                        //Gọi Hàm Login
+                        int Result = authenticationDAO.Login(username, password);
+
+
+                        switch (Result)
+                        {
+                            case 0:
+                                MessageBox.Show("Tên tài khoản không tồn tại");
+                                txtUserName.Focus();
+                                break;
+                            case 1:
+                                Navigation form = new Navigation();
+                                App.Current.MainWindow.Close();
+                                form.Show();
+                                break;
+                            case 2:
+                                MessageBox.Show("Sai Mật khẩu");
+                                pwbPassword.Focus();
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                }
+                else
+                {
+                    if (Validation.GetHasError(txtUserName))
+                    {
                         txtUserName.Focus();
-                        break;
-                    case 1:
-                        Navigation form = new Navigation();
-                        App.Current.MainWindow.Close();
-                        form.Show();
-                        break;
-                    case 2:
-                        MessageBox.Show("Sai Mật khẩu");
+                    }
+                    else if (Validation.GetHasError(pwbPassword))
+                    {
                         pwbPassword.Focus();
-                        break;
+                    }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error");
+                if (username.Length == 0)
+                {
+                    txtUserName.Text = "";
+                    txtUserName.Focus();
+                }
+                else
+                {
+                    pwbPassword.Password = " ";
+                    pwbPassword.Password = "";
+                    pwbPassword.Focus();
+                }
             }
-
         }
+    }
+
+    public class UserLogin
+    {
+        public string Username { get; set; }
+
+        public string Password { get; set; }
     }
 }

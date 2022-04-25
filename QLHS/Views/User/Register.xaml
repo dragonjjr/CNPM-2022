@@ -7,6 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:pw="clr-namespace:QLHS.PasswordBoxHelper"
+      xmlns:vd="clr-namespace:QLHS.Validations"
       Title="Register">
 
     <Grid>
@@ -29,17 +31,50 @@
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Tên đăng nhập" 
-                            Margin="0 15"/>
+                            Margin="0 15">
+                    <TextBox.Text>
+                        <Binding Path="Username" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Tên đăng nhập không được để trống"/>
+                                <vd:RegexValidation RegexText="^.{8,}$" ErrorMsg="Tên đăng nhập phải có ít nhất 8 ký tự"/>
+                                <vd:RegexValidation RegexText="^.{8,20}$" ErrorMsg="Tên đăng nhập không được vượt quá 20 ký tự"/>
+                                <vd:RegexValidation RegexText="^[a-zA-Z0-9]{8,20}$" ErrorMsg="Tên đăng nhập không được có kí tự đặc biệt"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <PasswordBox Name="pwbPassword" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Mật khẩu" 
-                            Margin="0 15"/>
+                            Margin="0 15" pw:PasswordBoxAssistant.BindPassword="True">
+                    <pw:PasswordBoxAssistant.BoundPassword>
+                        <Binding Path="Password" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Mật khẩu không được để trống"/>
+                                <vd:RegexValidation RegexText="^.{8,}$" ErrorMsg="Mật khẩu phải có ít nhất 8 ký tự"/>
+                                <vd:RegexValidation RegexText="^.{8,20}$" ErrorMsg="Mật khẩu không được vượt quá 20 ký tự"/>
+                                <vd:RegexValidation RegexText="^[a-zA-Z0-9_-]{8,20}$" ErrorMsg="Mật khẩu không được có kí tự đặc biệt"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </pw:PasswordBoxAssistant.BoundPassword>
+                </PasswordBox>
                 <PasswordBox Name="pwbConfirmPass" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Xác nhận mật khẩu" 
-                            Margin="0 15"/>
+                            Margin="0 15" pw:PasswordBoxAssistant.BindPassword="True">
+                    <pw:PasswordBoxAssistant.BoundPassword>
+                        <Binding Path="ConfirmPassword" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Mật khẩu không được để trống"/>
+                                <vd:RegexValidation RegexText="^.{8,}$" ErrorMsg="Mật khẩu phải có ít nhất 8 ký tự"/>
+                                <vd:RegexValidation RegexText="^.{8,20}$" ErrorMsg="Mật khẩu không được vượt quá 20 ký tự"/>
+                                <vd:RegexValidation RegexText="^[a-zA-Z0-9_-]{8,20}$" ErrorMsg="Mật khẩu không được có kí tự đặc biệt"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </pw:PasswordBoxAssistant.BoundPassword>
+                </PasswordBox>
                 <Button Name="btnRegister" Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10" Click="btnRegister_Click">Đăng ký</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">

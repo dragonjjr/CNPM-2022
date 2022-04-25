@@ -7,6 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:vd="clr-namespace:QLHS.Validations"
+      xmlns:pw="clr-namespace:QLHS.PasswordBoxHelper"
       Title="Login">
 
     <Grid>
@@ -29,7 +31,15 @@
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Tên đăng nhập" 
-                            Margin="0 15"/>
+                            Margin="0 15">
+                    <TextBox.Text>
+                        <Binding Path="Username" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="[0-9a-zA-Z]{1,}" ErrorMsg="Tên đăng nhập không được để trống"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock HorizontalAlignment="Right" Margin="0 0 0 -10">
                     <Hyperlink NavigateUri="ForgetPass.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" FontSize="12.5" Foreground="Black">Quên mật khẩu?</Hyperlink>
                 </TextBlock>
@@ -37,7 +47,15 @@
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Mật khẩu" 
-                            Margin="0 15"/>
+                            Margin="0 15" pw:PasswordBoxAssistant.BindPassword="True">
+                    <pw:PasswordBoxAssistant.BoundPassword>
+                        <Binding Path="Password" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="[0-9a-zA-Z]{1,}" ErrorMsg="Mật khẩu không được để trống"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </pw:PasswordBoxAssistant.BoundPassword>
+                </PasswordBox>
                 <Button Name="btnLogin" Click="btnLogin_Click" Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10">Đăng nhập</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Register.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">Đăng ký tài khoản</Hyperlink>

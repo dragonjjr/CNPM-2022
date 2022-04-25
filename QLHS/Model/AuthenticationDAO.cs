@@ -23,7 +23,7 @@ namespace QLHS.Model
             // return 0 : Sai tên tài khoản
             // return 1 : Đăng nhập thành công
             // return 2 : Sai mật khẩu
-            var user = DB.tb_Users.SingleOrDefault(u => u.Username == username);
+            var user = DB.tb_Users.SingleOrDefault(u => u.Username == username && u.IsDeleted == false);
 
 
             if (user != null)
@@ -105,6 +105,10 @@ namespace QLHS.Model
                     tb_Users users = new tb_Users();
                     users.Username = username;
                     users.Password = strPwHash;
+                    users.RoleID = 1;
+                    users.CreatedDate = DateTime.Now;
+                    users.LastUpdatedDate = DateTime.Now;
+                    users.IsDeleted = false;
 
                     DB.tb_Users.Add(users);
                     DB.SaveChanges();

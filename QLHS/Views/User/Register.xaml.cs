@@ -22,44 +22,104 @@ namespace QLHS.Views
     public partial class Register : Page
     {
         private AuthenticationDAO authenticationDAO = new AuthenticationDAO();
+
+
         public Register()
         {
             InitializeComponent();
+            this.DataContext = new UserRegister();
         }
 
          private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUserName.Text;
-            string password = pwbPassword.Password;
-            string confirmpass = pwbConfirmPass.Password;
+            string username = txtUserName.Text.Trim();
+            string password = pwbPassword.Password.Trim();
+            string confirmpass = pwbConfirmPass.Password.Trim();
 
-            try
+            if (username.Length > 0 && password.Length > 0 && confirmpass.Length > 0)
             {
-                // Gọi hàm đăng ký
-                int Result = authenticationDAO.Register(username, password, confirmpass);
-
-                switch (Result)
+                if (Validation.GetHasError(txtUserName) == false && Validation.GetHasError(pwbPassword) == false && Validation.GetHasError(pwbConfirmPass) == false)
                 {
-                    case 0:
-                        MessageBox.Show("Tên tài khoản đã tồn tại");
+                    try
+                    {
+                        // Gọi hàm đăng ký
+                        int Result = authenticationDAO.Register(username, password, confirmpass);
+
+                        switch (Result)
+                        {
+                            case 0:
+                                MessageBox.Show("Tên tài khoản đã tồn tại");
+                                txtUserName.Focus();
+                                break;
+                            case 1:
+                                MessageBox.Show("Đăng ký thành công");
+
+                                txtUserName.Clear();
+                                Validation.ClearInvalid(txtUserName.GetBindingExpression(TextBox.TextProperty));
+
+                                pwbPassword.Clear();
+                                Validation.ClearInvalid(pwbPassword.GetBindingExpression(PasswordBoxHelper.PasswordBoxAssistant.BoundPassword));
+
+                                pwbConfirmPass.Clear();
+                                Validation.ClearInvalid(pwbConfirmPass.GetBindingExpression(PasswordBoxHelper.PasswordBoxAssistant.BoundPassword));
+
+
+                                break;
+                            case 2:
+                                MessageBox.Show("Mật khẩu xác nhận lại không đúng");
+                                pwbConfirmPass.Focus();
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                }
+                else
+                {
+                    if (Validation.GetHasError(txtUserName))
+                    {
                         txtUserName.Focus();
-                        break;
-                    case 1:
-                        MessageBox.Show("Đăng ký thành công");
-                        txtUserName.Text = "";
-                        pwbPassword.Password = "";
-                        pwbConfirmPass.Password = "";
-                        break;
-                    case 2:
-                        MessageBox.Show("Mật khẩu xác nhận lại không đúng");
+                    }
+                    else if (Validation.GetHasError(pwbPassword))
+                    {
+                        pwbPassword.Focus();
+                    }
+                    else if (Validation.GetHasError(pwbConfirmPass))
+                    {
                         pwbConfirmPass.Focus();
-                        break;
+                    }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error");
+                if (username.Length < 1)
+                {
+                    txtUserName.Text = "";
+                    txtUserName.Focus();
+                }
+                else if (pwbPassword.Password.Length < 1)
+                {
+                    pwbPassword.Password = " ";
+                    pwbPassword.Clear();
+                    pwbPassword.Focus();
+                }
+                else
+                {
+                    pwbConfirmPass.Password = " ";
+                    pwbConfirmPass.Clear();
+                    pwbConfirmPass.Focus();
+                }
             }
         }
+    }
+
+    public class UserRegister
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+
     }
 }

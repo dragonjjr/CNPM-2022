@@ -124,6 +124,8 @@
     <Compile Include="Model\AuthenticationDAO.cs" />
     <Compile Include="Model\ClassManageDAO.cs" />
     <Compile Include="Model\StudentManageDAO.cs" />
+    <Compile Include="PasswordBoxHelper\PasswordBoxAssistant.cs" />
+    <Compile Include="Validations\RegexValidation.cs" />
     <Compile Include="Views\Class\ClassManager.xaml.cs">
       <DependentUpon>ClassManager.xaml</DependentUpon>
     </Compile>
