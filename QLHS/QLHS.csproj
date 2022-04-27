@@ -52,6 +52,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -126,6 +127,10 @@
     <Compile Include="Model\StudentManageDAO.cs" />
     <Compile Include="PasswordBoxHelper\PasswordBoxAssistant.cs" />
     <Compile Include="Validations\RegexValidation.cs" />
+
+    <Compile Include="Model\RegulationDAO.cs" />
+    <Compile Include="Model\SubjectDAO.cs" />
+
     <Compile Include="Views\Class\ClassManager.xaml.cs">
       <DependentUpon>ClassManager.xaml</DependentUpon>
     </Compile>

@@ -8,7 +8,8 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Quản lý lớp học" Background="White">
+      Title="Quản lý lớp học" Background="White"
+      >
 
     <Grid>
         <StackPanel>
@@ -27,9 +28,12 @@
                     <TextBox Name="txtSearch" Width="400" FontSize="15"  materialDesign:HintAssist.Hint=" Tìm kiếm" />
                 </Border>
                 <Button Name="btnSearch" Width="100" Margin="30,0,0,0" Content="Tìm kiếm" Foreground="White" Click="btnSearch_Click"></Button>
-                <Button Name="btnDelete" Width="70" Margin="30,0,0,0" Background="Red" Foreground="White" Content="Xóa" Click="btnDelete_Click"></Button>
-                <Button Name="btnAdd" Width="70" Margin="10,0,0,0" Background="Green" Click="btnAdd_Click" Foreground="White" Content="Thêm"></Button>
-
+                <Button Name="btnDelete" Width="65" Margin="30,0,0,0" Background="Red" Foreground="White" Click="btnDelete_Click">
+                    <materialDesign:PackIcon Kind="Minus" MinHeight="30" MinWidth="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+                <Button Name="btnAdd" Width="65" Margin="10,0,0,0" Background="Green" Click="btnAdd_Click" Foreground="White">
+                    <materialDesign:PackIcon Kind="PlusThick" MinHeight="30" MinWidth="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
             </WrapPanel>
 
             <ListView Name="lvStudent" Margin="0,15,0,0" SelectionMode="Single">

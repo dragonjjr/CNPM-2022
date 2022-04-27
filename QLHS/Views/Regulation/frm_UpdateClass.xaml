@@ -11,16 +11,18 @@
     <Grid>
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="20">Cập nhật lớp học</TextBlock>
-            <ComboBox Name="cbGrade" Width="200" Margin="0,40,0,0" ></ComboBox>
-            <ComboBox Name="cbClass" Width="200" Margin="0,30,0,0"></ComboBox>
+            <ComboBox Name="cbGrade" Width="200" Margin="0,40,0,0" SelectionChanged="cbGrade_SelectionChanged" DisplayMemberPath="Name" SelectedValuePath="ID"></ComboBox>
+            <ComboBox Name="cbClass" Width="200" Margin="0,30,0,0" SelectionChanged="cbClass_SelectionChanged" DisplayMemberPath="ID" SelectedValuePath="ID"></ComboBox>
             <Border CornerRadius="6" BorderThickness="1" BorderBrush="Black" Margin="0,30,0,0" Width="200">
                 <TextBox Name="txtClassName" Width="200" FontSize="15"  materialDesign:HintAssist.Hint=" Tên lớp học" />
             </Border>
 
             <WrapPanel Margin="0,60,0,0" HorizontalAlignment="Center">
-                <Button Width="100" Foreground="White" Content="Cập nhật"></Button>
-                <Button Width="80" Margin="20,0,0,0" Background="Red" Foreground="White" Content="Xóa"></Button>
+                <Button Name="btnUpdate" Width="100" Foreground="White" Content="Cập nhật" Click="btnUpdate_Click"></Button>
+                <Button Name="btnDelete" Width="80" Margin="20,0,0,0" Background="Red" Foreground="White" Content="Xóa" Click="btnDelete_Click"></Button>
+                <Button Name="btnExit" Click="btnExit_Click" Width="80" Margin="20,0,0,0" Foreground="White" Content="Thoát"></Button>
             </WrapPanel>
+            
         </StackPanel>
     </Grid>
 </Window>

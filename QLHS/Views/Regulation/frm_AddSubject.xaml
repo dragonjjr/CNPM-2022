@@ -16,8 +16,8 @@
             </Border>
 
             <WrapPanel Margin="0,60,0,0" HorizontalAlignment="Center">
-                <Button Width="80" Background="Green" Foreground="White" Content="Thêm"></Button>
-                <Button Width="80" Margin="20,0,0,0" Background="Red" Foreground="White" Content="Xóa"></Button>
+                <Button Name="btnAdd" Width="80" Background="Green" Foreground="White" Content="Thêm" Click="btnAdd_Click"></Button>
+                <Button Name="btnExit" Click="btnExit_Click" Width="80" Margin="20,0,0,0" Foreground="White" Content="Thoát"></Button>
             </WrapPanel>
         </StackPanel>
     </Grid>

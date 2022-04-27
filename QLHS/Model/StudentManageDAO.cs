@@ -30,9 +30,6 @@ namespace QLHS.Model
             return listStudentSearch;
         }
 
-
-
-
         public bool AddStudent(tb_Students Students)
         {
             DB.tb_Students.Add(Students);

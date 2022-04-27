@@ -26,6 +26,11 @@ namespace QLHS.Model
             return list;
         }
 
+        public tb_Class GetInfoClassByName(string name)
+        {
+            return db.tb_Class.FirstOrDefault(cl => cl.Name == name && cl.IsDeleted == false);
+        }
+
         public ObservableCollection<tb_Students> GetInfoStudentsOfClass(int classId, string studentNameSearch)
         {
             var list = new ObservableCollection<tb_Students>(db.tb_Students.Where(st => st.ClassID == classId && st.IsDeleted == false && st.Name.Contains(studentNameSearch)).ToList());
@@ -63,6 +68,27 @@ namespace QLHS.Model
             return db.SaveChanges() > 0;
         }
 
+        public bool AddInfoClass(tb_Class newClass)
+        {
+            db.tb_Class.Add(newClass);
+            return db.SaveChanges() > 0;
+        }
+
+        public bool UpdateInfoNameClass(int classId, string newName)
+        {
+            var classInfo = db.tb_Class.Single(st => st.ID == classId && st.IsDeleted == false);
+            classInfo.Name = newName;
+
+            return db.SaveChanges() > 0;
+        }
+
+        public bool DeleteInfoClass(int classId)
+        {
+            var classInfo = db.tb_Class.Single(st => st.ID == classId);
+            classInfo.IsDeleted = true;
+
+            return db.SaveChanges() > 0;
+        }
 
         public ClassManageDAO()
         {
