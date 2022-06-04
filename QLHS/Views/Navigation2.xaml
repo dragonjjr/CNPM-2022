@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLHS.Views"
         xmlns:uc="clr-namespace:QLHS.Views"
         mc:Ignorable="d"
-        Title="Navigation" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -50,9 +50,9 @@
 
             <Button
             Grid.Row="2"
-            Margin="10,0.6,0,0"
-            Content="Quản lý điểm" VerticalAlignment="Top"  Click="btnGradesManage_Click"/>
-            
+            Margin="10 0 0 0"
+            Content="Quản lý điểm" />
+
             <Button
             Name="btnRegulationManage"
             Grid.Row="3"
@@ -62,10 +62,8 @@
              />
 
             <Button
-                x:Name="btnReport"
             Grid.Row="4"
             Margin="10 0 0 0"
-                Click="btnReport_Click"
             Content="Báo cáo"/>
         </Grid>
 

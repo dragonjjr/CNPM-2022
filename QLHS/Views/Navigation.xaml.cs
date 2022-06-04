@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using QLHS.Views.Class;
 using QLHS.Views.Regulation;
+using QLHS.Views.Grades;
+using QLHS.Views.Report;
 
 namespace QLHS.Views
 {
@@ -40,6 +42,16 @@ namespace QLHS.Views
         private void btnStudentManage_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new StudentManage();
+        }
+
+        private void btnGradesManage_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new GradesManagement();
+        }
+
+        private void btnReport_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ReportManagement();
         }
     }
 }
