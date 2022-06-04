@@ -62,6 +62,7 @@ namespace QLHS.Views.Regulation
                                 newClass.IsDeleted = false;
                                 newClass.GroupID = (int)cbGrade.SelectedValue;
                                 newClass.Name = txtClassName.Text.ToString().Trim();
+                                newClass.Quantity = 0;
 
                                 if (classManageDao.AddInfoClass(newClass))
                                 {

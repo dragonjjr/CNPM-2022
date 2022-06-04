@@ -47,8 +47,9 @@ namespace QLHS.Model
 
         public bool CheckQuantityStudentOfclass(int classId, int quantityStudentsAddToClass)
         {
-            int? quantity = db.tb_Class.Where(cl => cl.ID == classId).Select(cl => cl.Quantity).Single();
-            int quantityCurrent = db.tb_Students.Where(st => st.ClassID == classId).Count();
+            var regulation = db.tb_Regulations.Where(re => re.IsDeleted == false).FirstOrDefault();
+            int? quantity = regulation.MaxQuantity;
+            int? quantityCurrent = db.tb_Class.Where(cl => cl.ID == classId).Select(cl => cl.Quantity).Single();
             return quantity >= (quantityCurrent + quantityStudentsAddToClass);
         }
 
@@ -56,6 +57,10 @@ namespace QLHS.Model
         {
             var student = db.tb_Students.Single(st => st.ID == studentId && st.IsDeleted == false);
             student.ClassID = classId;
+
+            // Update quantity student.
+            var classInfo = db.tb_Class.Single(cl => cl.ID == classId && cl.IsDeleted == false);
+            classInfo.Quantity += 1;
 
             return db.SaveChanges() > 0;
         }
