@@ -32,18 +32,19 @@ namespace QLHS.Views
 
          private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            string email = txtEmail.Text.Trim();
             string username = txtUserName.Text.Trim();
             string password = pwbPassword.Password.Trim();
             string confirmpass = pwbConfirmPass.Password.Trim();
 
-            if (username.Length > 0 && password.Length > 0 && confirmpass.Length > 0)
+            if (email.Length > 0 && username.Length > 0 && password.Length > 0 && confirmpass.Length > 0)
             {
-                if (Validation.GetHasError(txtUserName) == false && Validation.GetHasError(pwbPassword) == false && Validation.GetHasError(pwbConfirmPass) == false)
+                if (Validation.GetHasError(txtEmail) ==false  && Validation.GetHasError(txtUserName) == false && Validation.GetHasError(pwbPassword) == false && Validation.GetHasError(pwbConfirmPass) == false)
                 {
                     try
                     {
                         // Gọi hàm đăng ký
-                        int Result = authenticationDAO.Register(username, password, confirmpass);
+                        int Result = authenticationDAO.Register(email ,username, password, confirmpass);
 
                         switch (Result)
                         {
@@ -53,6 +54,9 @@ namespace QLHS.Views
                                 break;
                             case 1:
                                 MessageBox.Show("Đăng ký thành công");
+
+                                txtEmail.Clear();
+                                Validation.ClearInvalid(txtEmail.GetBindingExpression(TextBox.TextProperty));
 
                                 txtUserName.Clear();
                                 Validation.ClearInvalid(txtUserName.GetBindingExpression(TextBox.TextProperty));
@@ -78,7 +82,11 @@ namespace QLHS.Views
                 }
                 else
                 {
-                    if (Validation.GetHasError(txtUserName))
+                    if(Validation.GetHasError(txtEmail))
+                    {
+                        txtEmail.Focus();
+                    }
+                    else if (Validation.GetHasError(txtUserName))
                     {
                         txtUserName.Focus();
                     }
@@ -94,7 +102,12 @@ namespace QLHS.Views
             }
             else
             {
-                if (username.Length < 1)
+                if(txtEmail.Text.Length < 1)
+                {
+                    txtEmail.Text = "";
+                    txtEmail.Focus();
+                }
+                else if (txtUserName.Text.Length < 1)
                 {
                     txtUserName.Text = "";
                     txtUserName.Focus();
@@ -120,6 +133,8 @@ namespace QLHS.Views
         public string Username { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+
+        public string Email { get; set; }
 
     }
 }

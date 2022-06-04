@@ -24,10 +24,17 @@ namespace QLHS.Views.Class
     public partial class StudentManage : Page
     {
         private StudentManageDAO studentManageDAO = new StudentManageDAO();
+
+        public class Student
+        {
+            public string Name { get; set; }
+
+        }
+
         public StudentManage()
         {
             InitializeComponent();
-
+            this.DataContext = new Student();
             ReFeshListStudentRecord();
         }
 
@@ -73,7 +80,7 @@ namespace QLHS.Views.Class
             cbGender.Items.Clear();
             cbGender.Items.Add(new ComboBoxItem() { Tag = 0, Content = "Nam" });
             cbGender.Items.Add(new ComboBoxItem() { Tag = 1, Content = "Nữ" });
-
+            cbGender.SelectedIndex = 0;
             dpDateOFBirth.SelectedDate = DateTime.Now;
         }
 
@@ -96,17 +103,27 @@ namespace QLHS.Views.Class
                 students.IsDeleted = false;
 
 
-                if (studentManageDAO.AddStudent(students))
+                if (!string.IsNullOrEmpty(students.Name))
                 {
-                    MessageBox.Show("Thêm hồ sơ học sinh thành công");
+                    if (studentManageDAO.AddStudent(students))
+                    {
+                        MessageBox.Show("Thêm hồ sơ học sinh thành công");
 
-                    ClearInputStudent();
+                        ClearInputStudent();
 
-                    ReFeshListStudentRecord();
+                        ReFeshListStudentRecord();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi xảy ra, thêm thất bại", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Có lỗi xảy ra, thêm thất bại", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtName.Text = " ";
+                    txtName.Text = "";
+                    txtName.Focus();
+                    MessageBox.Show("Vui lòng nhập thông tin còn thiếu!", "Thêm học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
@@ -156,6 +173,7 @@ namespace QLHS.Views.Class
         {
             txtID.Text = "";
             txtName.Text = "";
+            Validation.ClearInvalid(txtName.GetBindingExpression(TextBox.TextProperty));
             dpDateOFBirth.SelectedDate = DateTime.Now;
             txtEmail.Text = "";
             txtAddress.Text = "";
@@ -212,15 +230,25 @@ namespace QLHS.Views.Class
                 students.Email = txtEmail.Text;
                 students.LastUpdatedDate = DateTime.Now;
 
-                if (studentManageDAO.UpdateStudent(students))
+                if (!string.IsNullOrEmpty(students.Name))
                 {
-                    MessageBox.Show("Cập nhật thành công");
+                    if (studentManageDAO.UpdateStudent(students))
+                    {
+                        MessageBox.Show("Cập nhật thành công");
 
-                    ReFeshListStudentRecord();
+                        ReFeshListStudentRecord();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi xảy ra", "Cập nhật hồ sơ học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Có lỗi xảy ra", "Cập nhật hồ sơ học sinh", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtName.Text = " ";
+                    txtName.Text = "";
+                    txtName.Focus();
+                    MessageBox.Show("Vui lòng nhập thông tin còn thiếu!", "Cập nhật hồ sơ học sinh", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)

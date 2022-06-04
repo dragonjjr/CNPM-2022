@@ -14,7 +14,7 @@
          Background="Transparent"
          FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        Title="" Height="450" Width="700">
+        Title="" Height="460" Width="700">
     <Grid>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"></Frame>
     </Grid>

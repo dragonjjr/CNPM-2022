@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QLHS.Views.Class"
       xmlns:uc="clr-namespace:QLHS.Views"
+      xmlns:vd="clr-namespace:QLHS.Validations"
       xmlns:cv="clr-namespace:QLHS.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
@@ -19,12 +20,20 @@
                 <StackPanel Width="400" Height="auto">
                     <StackPanel>
                         <TextBlock Margin="0,10,0,10" FontSize="34" Foreground="Black" FontWeight="SemiBold" HorizontalAlignment="Center">Hồ sơ học sinh</TextBlock>
-                        <TextBox Name="txtID" Visibility="Collapsed" IsEnabled="False" Margin="0 6" materialDesign:HintAssist.Hint="STT" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300"  FontSize="14"/>
-                        <TextBox Margin="0 5" Name="txtName" materialDesign:HintAssist.Hint="Họ và tên" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300"  FontSize="14"/>
-                        <DatePicker Margin="0 5" Name="dpDateOFBirth" materialDesign:HintAssist.Hint="Ngày Sinh" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Width="300" FontSize="14"/>
-                        <ComboBox Margin="0 5" Name="cbGender" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="300" FontSize="14"/>
-                        <TextBox Margin="0 5" Name="txtAddress" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" FontSize="14"/>
-                        <TextBox Margin="0 5" Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" FontSize="14"/>
+                        <TextBox Name="txtID" Visibility="Collapsed" IsEnabled="False" Margin="0 12" materialDesign:HintAssist.Hint="STT" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300"  FontSize="14"/>
+                        <TextBox Margin="0 12" Name="txtName" materialDesign:HintAssist.Hint="Họ và tên" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300"  FontSize="14">
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Họ và tên không được để trống"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <DatePicker Margin="0 12" Name="dpDateOFBirth" materialDesign:HintAssist.Hint="Ngày Sinh" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Width="300" FontSize="14"></DatePicker>
+                        <ComboBox Margin="0 12" Name="cbGender" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="300" FontSize="14"/>
+                        <TextBox Margin="0 12" Name="txtAddress" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" FontSize="14"/>
+                        <TextBox Margin="0 12" Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" FontSize="14"/>
                     </StackPanel>
                     <UniformGrid Name="unfUpdate" Columns="3"  VerticalAlignment="Bottom" Margin="0 20 0 20" Visibility="Collapsed">
                         <Button Name="btnUpdateStudent" Click="btnUpdateStudent_Click" HorizontalAlignment="Right" Style="{StaticResource button}" Background="#23FF61" Height="40" Width="90" Foreground="Black">

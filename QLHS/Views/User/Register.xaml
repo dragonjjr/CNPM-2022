@@ -27,6 +27,21 @@
         </Border>
         <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 0 0 0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="280">
+                <TextBox Name="txtEmail" FontSize="14"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            materialDesign:HintAssist.Hint="Email" 
+                            Margin="0 15">
+                    <TextBox.Text>
+                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Email không được để trống"/>
+                                <vd:RegexValidation RegexText="^[^@\s]+@[^@\s]+\.(com|net|org|gov)$" ErrorMsg="Email không đúng định dạng"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    
+                </TextBox>
                 <TextBox Name="txtUserName" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             VerticalAlignment="Top"
@@ -75,7 +90,7 @@
                         </Binding>
                     </pw:PasswordBoxAssistant.BoundPassword>
                 </PasswordBox>
-                <Button Name="btnRegister" Style="{StaticResource buttonRound}" Height="46" Margin="0 30 0 10" Click="btnRegister_Click">Đăng ký</Button>
+                <Button Name="btnRegister" Style="{StaticResource buttonRound}" Height="46" Margin="0 5 0 10" Click="btnRegister_Click">Đăng ký</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">
                         Đăng nhập

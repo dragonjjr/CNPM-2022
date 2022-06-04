@@ -5,7 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QLHS.Views"
       mc:Ignorable="d" 
+      xmlns:vd="clr-namespace:QLHS.Validations"
       d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:pw="clr-namespace:QLHS.PasswordBoxHelper"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       Title="ForgetPass">
 
@@ -24,17 +26,78 @@
             </Border.Background>
         </Border>
         <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 0 0 0">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="280">
-                <TextBox Name="tbTenDangNhap" FontSize="14"
+            <Grid>
+            <StackPanel Name="spDisplayCheckInfor"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="280">
+                <TextBox Name="txtEmail" FontSize="14"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            materialDesign:HintAssist.Hint="Email" 
+                            Margin="0 10">
+                    <TextBox.Text>
+                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Email không được để trống"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="txtUserName" FontSize="14"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Tên đăng nhập" 
-                            Margin="0 30"/>
-                <Button Name="btnGui"  Style="{StaticResource buttonRound}" Height="46" Margin="0 25 0 10">Xác nhận</Button>
+                            Margin="0 30">
+                    <TextBox.Text>
+                        <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Tên đăng nhập không được để trống"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Button Name="btnGui"  Style="{StaticResource buttonRound}" Height="46" Margin="0 25 0 10" Click="btnGui_Click">Xác nhận</Button>
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">Đăng nhập</Hyperlink>
                 </TextBlock>
             </StackPanel>
+                <StackPanel Name="spResetPass" Visibility="Collapsed"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="280">
+                    <PasswordBox Name="pwbPassword" FontSize="14"
+                            Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                            VerticalAlignment="Top"
+                            materialDesign:HintAssist.Hint="Mật khẩu" 
+                            Margin="0 15" pw:PasswordBoxAssistant.BindPassword="True">
+                        <pw:PasswordBoxAssistant.BoundPassword>
+                            <Binding Path="Password" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Mật khẩu không được để trống"/>
+                                    <vd:RegexValidation RegexText="^.{8,}$" ErrorMsg="Mật khẩu phải có ít nhất 8 ký tự"/>
+                                    <vd:RegexValidation RegexText="^.{8,20}$" ErrorMsg="Mật khẩu không được vượt quá 20 ký tự"/>
+                                    <vd:RegexValidation RegexText="^[a-zA-Z0-9_-]{8,20}$" ErrorMsg="Mật khẩu không được có kí tự đặc biệt"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </pw:PasswordBoxAssistant.BoundPassword>
+                    </PasswordBox>
+                    <PasswordBox Name="pwbConfirmPass" FontSize="14"
+                            Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                            VerticalAlignment="Top"
+                            materialDesign:HintAssist.Hint="Xác nhận mật khẩu" 
+                            Margin="0 15" pw:PasswordBoxAssistant.BindPassword="True">
+                        <pw:PasswordBoxAssistant.BoundPassword>
+                            <Binding Path="ConfirmPassword" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vd:RegexValidation RegexText="^(?!\s*$).+" ErrorMsg="Mật khẩu không được để trống"/>
+                                    <vd:RegexValidation RegexText="^.{8,}$" ErrorMsg="Mật khẩu phải có ít nhất 8 ký tự"/>
+                                    <vd:RegexValidation RegexText="^.{8,20}$" ErrorMsg="Mật khẩu không được vượt quá 20 ký tự"/>
+                                    <vd:RegexValidation RegexText="^[a-zA-Z0-9_-]{8,20}$" ErrorMsg="Mật khẩu không được có kí tự đặc biệt"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </pw:PasswordBoxAssistant.BoundPassword>
+                    </PasswordBox>
+                    <Button Name="btnconfirm"  Style="{StaticResource buttonRound}" Height="46" Margin="0 25 0 10" Click="btnconfirm_Click">Xác nhận</Button>
+                    <TextBlock HorizontalAlignment="Center">
+                    <Hyperlink Name="hplNavigate" NavigateUri="Login.xaml" Style="{StaticResource MaterialDesignSubtitle2Hyperlink}" Foreground="Black">Đăng nhập</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </Page>

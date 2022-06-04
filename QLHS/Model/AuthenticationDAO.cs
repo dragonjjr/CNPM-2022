@@ -1,10 +1,8 @@
 ﻿using QLHS.DB;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace QLHS.Model
 {
@@ -63,32 +61,14 @@ namespace QLHS.Model
             }
         }
 
-        public int Register(string username, string password, string confirmpass)
+        public int Register(string email, string username, string password, string confirmpass)
         {
             // return 0 : tài khoản đã tồn tại
             // return 1 : Đăng ký thành công
             // return 2 : Mật khẩu xác nhận lại ko đúng
 
 
-            //chuyển mật khẩu sang mảng byte
-            var sha1 = new SHA1CryptoServiceProvider();
-            var bytesPw = Encoding.ASCII.GetBytes(password);
-
-            //salt và chuyển salt sang byte
-            var salt = DateTime.Now.Millisecond.ToString();
-            var bytesSalt = Encoding.ASCII.GetBytes(salt);
-
-            //hash
-            var bytesPwhashed = sha1.ComputeHash(bytesPw);
-
-            //gắn salt lưu xuống database
-            var bytesResult = new byte[bytesPwhashed.Length + bytesSalt.Length];
-            Array.Copy(bytesPwhashed, bytesResult, bytesPwhashed.Length);
-            Array.Copy(bytesSalt, 0, bytesResult, bytesPwhashed.Length, bytesSalt.Length);
-
-
-            // chuyển array byte sang string
-            var strPwHash = ArrByteToString(bytesResult);
+            string strPwHash = HasPassword(password);
             // Lấy Username kiểm tra tồn tại chưa
             var user = DB.tb_Users.SingleOrDefault(u => u.Username == username);
 
@@ -103,6 +83,7 @@ namespace QLHS.Model
                 if (confirmpass == password)
                 {
                     tb_Users users = new tb_Users();
+                    users.Email = email;
                     users.Username = username;
                     users.Password = strPwHash;
                     users.RoleID = 1;
@@ -123,6 +104,57 @@ namespace QLHS.Model
                 }
             }
 
+        }
+
+        private string HasPassword(string password)
+        {
+            //chuyển mật khẩu sang mảng byte
+            var sha1 = new SHA1CryptoServiceProvider();
+            var bytesPw = Encoding.ASCII.GetBytes(password);
+
+            //salt và chuyển salt sang byte
+            var salt = DateTime.Now.Millisecond.ToString();
+            var bytesSalt = Encoding.ASCII.GetBytes(salt);
+
+            //hash
+            var bytesPwhashed = sha1.ComputeHash(bytesPw);
+
+            //gắn salt lưu xuống database
+            var bytesResult = new byte[bytesPwhashed.Length + bytesSalt.Length];
+            Array.Copy(bytesPwhashed, bytesResult, bytesPwhashed.Length);
+            Array.Copy(bytesSalt, 0, bytesResult, bytesPwhashed.Length, bytesSalt.Length);
+
+
+            // chuyển array byte sang string
+            var strPwHash = ArrByteToString(bytesResult);
+            return strPwHash;
+        }
+
+        public bool CheckUserForGetPass(string email, string username)
+        {
+            var user = DB.tb_Users.SingleOrDefault(u => u.Username == username && u.Email == email);
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ResetPass(string email, string username, string password)
+        {
+            var user = DB.tb_Users.SingleOrDefault(u => u.Username == username && u.Email == email);
+            if (user != null)
+            {
+                user.Password = HasPassword(password);
+                user.LastUpdatedDate = DateTime.Now;
+                return DB.SaveChanges()>1;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private string ArrByteToString(Byte[] arrByte)
