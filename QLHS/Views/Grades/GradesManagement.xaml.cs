@@ -112,6 +112,9 @@ namespace QLHS.Views.Grades
         {
             if(cbClass.SelectedValue != null)
             {
+                cbSemeter.IsEnabled = true;
+                cbStudent.IsEnabled = true;
+                cbSubject.IsEnabled = true;
                 DialogNhapDiem.IsOpen = true;
                 ClearInputGrades();
                 cbSemeter.ItemsSource = gradesManagementDAO.GetInfoSemeters();
