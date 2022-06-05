@@ -84,7 +84,7 @@ namespace QLHS.Model
 
         public bool CheckGrades(tb_TranScripts ts)
         {
-            var model = db.tb_TranScripts.Where(x => x.StudentID == ts.SubjectID && x.SemesterID == ts.SemesterID && x.SubjectID == ts.SubjectID && x.IsDeleted == false).ToList();
+            var model = db.tb_TranScripts.Where(x => x.StudentID == ts.StudentID && x.SemesterID == ts.SemesterID && x.SubjectID == ts.SubjectID && x.IsDeleted == false).ToList();
             if(model.Count > 0)
             {
                 return false;
